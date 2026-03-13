@@ -1,1 +1,3 @@
-# the-code-for-AI-s-simplified-version-of-Xash3d-doesn-t-work.
+# Mini version Xash3d
+
+! CODE BY AI !
