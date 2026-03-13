@@ -1,0 +1,51 @@
+#include <SDL2/SDL.h>
+#include <GL/gl.h>
+#include <iostream>
+
+// ! CODE BY AI !
+
+class MiniXash {
+public:
+    bool running = true;
+    
+    void Init() {
+        SDL_Init(SDL_INIT_VIDEO);
+        SDL_Window* window = SDL_CreateWindow("MiniXash Proto", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
+        SDL_GL_CreateContext(window);
+        
+        std::cout << "Engine Initialized. OpenGL version: " << glGetString(GL_VERSION) << std::endl;
+    }
+    
+    void LoadHLMap(const char* mapName) {
+        std::cout << "Loading Half-Life map: " << mapName << "..." << std::endl;
+    }
+    
+    void Run() {
+        while (running) {
+            ProcessInput();
+            RenderFrame();
+        }
+    }
+
+private:
+    void ProcessInput() {
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) running = false;
+        }
+    }
+
+    void RenderFrame() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        SDL_GL_SwapWindow(SDL_GL_GetCurrentWindow());
+    }
+};
+
+int main() {
+    MiniXash engine;
+    engine.Init();
+    engine.LoadHLMap("valve/maps/c1a0.bsp");
+    engine.Run();
+    return 0;
+}
