@@ -2,7 +2,7 @@
 
 The code for AI's simplified version of Xash3d doesn't work.
 
-# DOWNLOAD
+## DOWNLOAD
 
 How do download this version? It's very simple:
 
