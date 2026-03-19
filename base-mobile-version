@@ -43,7 +43,6 @@ int main(int argc, char* argv[]) {
         SDL_UpdateWindowSurface(window);
     }
 
-    // Очистка ресурсов
     Mix_FreeMusic(bgm);
     Mix_CloseAudio();
     SDL_DestroyWindow(window);
