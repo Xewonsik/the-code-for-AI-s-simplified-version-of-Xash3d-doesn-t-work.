@@ -28,7 +28,6 @@ int main(int argc, char* argv[]) {
         std::cout << "ERROR: " << MUSIC_PATH << std::endl;
     }
 
-    // Простейший игровой цикл
     bool running = true;
     SDL_Event event;
     while (running) {
