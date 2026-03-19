@@ -1,0 +1,53 @@
+#include <SDL.h>
+#include <SDL_mixer.h>
+#include <iostream>
+#include <string>
+
+// ! CODE MADE BY AI !
+
+const std::string BASE_PATH = "/storage/emulated/0/xash/valve/";
+const std::string MUSIC_PATH = BASE_PATH + "media/gamestartup.mp3";
+
+int main(int argc, char* argv[]) {
+
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+        return -1;
+    }
+
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        return -1;
+    }
+
+    SDL_Window* window = SDL_CreateWindow("Mini-Xash", SDL_WINDOWPOS_UNDEFINED, 
+                         SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
+
+    Mix_Music* bgm = Mix_LoadMUS(MUSIC_PATH.c_str());
+    if (bgm) {
+        Mix_PlayMusic(bgm, -1); // -1 для бесконечного повтора
+    } else {
+        std::cout << "ERROR: " << MUSIC_PATH << std::endl;
+    }
+
+    // Простейший игровой цикл
+    bool running = true;
+    SDL_Event event;
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT || event.type == SDL_FINGERDOWN) {
+                running = false;
+            }
+        }
+
+        SDL_Surface* screen = SDL_GetWindowSurface(window);
+        SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 45, 45, 45));
+        SDL_UpdateWindowSurface(window);
+    }
+
+    // Очистка ресурсов
+    Mix_FreeMusic(bgm);
+    Mix_CloseAudio();
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
